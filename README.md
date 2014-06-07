@@ -2,4 +2,4 @@
 
 A dummy project used for trying up stuff related to Spring.
 
-Two endpoints: `/` and `/private`.
+Two endpoints: `/` and `/private`. The latter is secure.

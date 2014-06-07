@@ -9,5 +9,8 @@
 </head>
 <body>
 <h1>Hats</h1>
+
+<a href="<c:url value="/private"/>">Private</a>
+
 </body>
 </html>
