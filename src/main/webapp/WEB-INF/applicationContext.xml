@@ -1,23 +1,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-
              xmlns:sec="http://www.springframework.org/schema/security"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-           http://www.springframework.org/schema/security
-           http://www.springframework.org/schema/security/spring-security.xsd">
-  <sec:http>
-    <sec:intercept-url pattern="/private" access="ROLE_USER"/> <!-- there must be at least a role for access here -->
-    <sec:form-login/>
-    <sec:logout logout-url="/logout" logout-success-url="/"/>
-  </sec:http>
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+  <beans profile="default">
+    <sec:http>
+      <sec:intercept-url pattern="/private" access="ROLE_USER"/>
+      <!-- there must be at least a role for access here -->
+      <sec:form-login/>
+      <sec:logout logout-url="/logout" logout-success-url="/"/>
+    </sec:http>
 
-  <sec:authentication-manager>
-    <sec:authentication-provider>
-      <sec:user-service>
-        <sec:user name="david" password="password" authorities="ROLE_USER, ROLE_ADMIN"/>
-        <sec:user name="timmy" password="password" authorities="ROLE_USER"/>
-      </sec:user-service>
-    </sec:authentication-provider>
-  </sec:authentication-manager>
+    <sec:authentication-manager>
+      <sec:authentication-provider>
+        <sec:user-service>
+          <sec:user name="david" password="password" authorities="ROLE_USER, ROLE_ADMIN"/>
+          <sec:user name="timmy" password="password" authorities="ROLE_USER"/>
+        </sec:user-service>
+      </sec:authentication-provider>
+    </sec:authentication-manager>
+  </beans>
+  <beans profile="insecure">
+    <bean id="springSecurityFilterChain" class="com.icantrap.examples.security.InsecureFilterChain"/>
+  </beans>
 </beans>
